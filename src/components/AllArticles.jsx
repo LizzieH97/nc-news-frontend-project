@@ -1,21 +1,38 @@
-import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import GetAllArticles from "./GetAllArticles";
+import Article from "./Article";
 
 export default function AllArticles() {
-  const [Articles, setArticles] = useState([]);
+  const [allArticles, setAllArticles] = useState([]);
+  const [articleID, setArticleID] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
-    GetAllArticles(Articles).then((allArticles) => {
-      setArticles(allArticles);
+    GetAllArticles(allArticles).then((gotArticles) => {
+      setAllArticles(gotArticles);
     });
-  }, [Articles]);
+  }, [allArticles]);
 
-  return (
+  const handleClick = (event) => {
+    setIsClicked(!isClicked);
+    const selectedArticle = event.target.value || event.target.parentNode.value;
+    setArticleID(selectedArticle);
+  };
+
+  return isClicked ? (
+    <>
+      <Article value={articleID} />
+    </>
+  ) : (
     <div className="article-grid-container">
-      {Articles.map((article) => {
+      {allArticles.map((article) => {
         return (
-          <div key={article.article_id} className="article-grid-item">
+          <button
+            key={article.article_id}
+            className="article-grid-item"
+            onClick={handleClick}
+            value={article.article_id}
+          >
             <h2>{article.title}</h2>
             <ul>
               <img src={article.article_img_url} className="article-img" />
@@ -23,7 +40,7 @@ export default function AllArticles() {
               <li>Topic: {article.topic}</li>
               <li>Votes: {article.votes}</li>
             </ul>
-          </div>
+          </button>
         );
       })}
     </div>
