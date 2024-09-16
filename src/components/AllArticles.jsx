@@ -12,17 +12,14 @@ export default function AllArticles() {
   }, [Articles]);
 
   return (
-    <div className="item-grid-container">
-      <h2 className="header-of-grid">Select your item:</h2>
+    <div className="article-grid-container">
       {Articles.map((article) => {
         return (
-          <div key={article.article_id} className="items">
+          <div key={article.article_id} className="article-grid-item">
+            <h2>{article.title}</h2>
             <ul>
-              <img src={article.article_img_url} />
-              <li>Title: {article.title}</li>
-              <li>ID: {article.article_id}</li>
+              <img src={article.article_img_url} className="article-img" />
               <li>Author: {article.author}</li>
-              <li>Created at: {article.created_at}</li>
               <li>Topic: {article.topic}</li>
               <li>Votes: {article.votes}</li>
             </ul>
