@@ -15,7 +15,7 @@ function App() {
           <NavBar className="nav-bar" />
           <Routes>
             <Route path="/articles" element={<AllArticles />} />
-            <Route path="/articles/:article_id" element={<Article />} />
+            <Route path="/articles/:article_id/*" element={<Article />} />
           </Routes>
         </div>
       </>

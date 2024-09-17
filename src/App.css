@@ -60,13 +60,39 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
 }
 .article-img {
   padding: 0;
   margin: 0;
   max-width: 80%;
   max-height: 80%;
+}
+.comment-grid-container {
+  grid-row: 3 / 5;
+  grid-column: 2 / 5;
+  display: grid;
+  flex-direction: column;
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  gap: 1rem;
+}
+.comment-grid-item {
+  border: 2px solid white;
+  border-radius: 1rem;
+  padding: 0px;
+  margin: 0px;
+  line-height: 2.5ch;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.comment-body {
+  width: 80%;
+  background-color: rgb(100, 100, 100);
+  border-radius: 10px;
+  padding: 7px;
 }
 h2 {
   padding: 0;
