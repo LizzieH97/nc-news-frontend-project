@@ -1,48 +1,40 @@
 import { useState, useEffect } from "react";
-import GetAllArticles from "./GetAllArticles";
+import { getAllArticles } from "../api/APICalls";
 import Article from "./Article";
+import { Link } from "react-router-dom";
 
 export default function AllArticles() {
   const [allArticles, setAllArticles] = useState([]);
-  const [articleID, setArticleID] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
-    GetAllArticles(allArticles).then((gotArticles) => {
+    getAllArticles(allArticles).then((gotArticles) => {
+      //   console.log(gotArticles);
       setAllArticles(gotArticles);
     });
-  }, [allArticles]);
+  }, []);
 
-  const handleClick = (event) => {
-    setIsClicked(!isClicked);
-    const selectedArticle = event.target.value || event.target.parentNode.value;
-    setArticleID(selectedArticle);
-  };
-
-  return isClicked ? (
-    <>
-      <Article value={articleID} />
-    </>
-  ) : (
+  return (
     <div className="article-grid-container">
       {allArticles.map((article) => {
         return (
-          <button
-            key={article.article_id}
-            className="article-grid-item"
-            onClick={handleClick}
-            value={article.article_id}
-          >
-            <h2>{article.title}</h2>
-            <ul>
-              <img src={article.article_img_url} className="article-img" />
-              <li>Author: {article.author}</li>
-              <li>Topic: {article.topic}</li>
-              <li>Votes: {article.votes}</li>
-            </ul>
-          </button>
+          <li key={article.article_id} className="article-grid-item">
+            <p>Topic: {article.topic}</p>
+            <Link to={`/articles/${article.article_id}`}>
+              <h2>{article.title}</h2>
+            </Link>
+            <img src={article.article_img_url} className="article-img" />
+            <p>By {article.author}</p>
+            <p>Created on: {article.created_at}</p>
+          </li>
         );
       })}
     </div>
   );
+  //   return isClicked ? (
+  //     <>
+  //       <Article value={articleID} />
+  //     </>
+  //   ) : (
+  //
+  //   );
 }
