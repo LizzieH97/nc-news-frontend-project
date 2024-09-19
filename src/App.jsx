@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import AllArticles from "./components/AllArticles";
 import Article from "./components/Article";
+import Comments from "./components/Comments";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
           <Routes>
             <Route path="/articles" element={<AllArticles />} />
             <Route path="/articles/:article_id/*" element={<Article />} />
+            <Route
+              path="/articles/:article_id/comments/comment_id"
+              element={Comments}
+            />
           </Routes>
         </div>
       </>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAllArticles } from "../api/APICalls";
-import Article from "./Article";
+
 import { Link } from "react-router-dom";
 
 export default function AllArticles() {
@@ -8,7 +8,6 @@ export default function AllArticles() {
 
   useEffect(() => {
     getAllArticles(allArticles).then((gotArticles) => {
-      //   console.log(gotArticles);
       setAllArticles(gotArticles);
     });
   }, []);
@@ -30,11 +29,4 @@ export default function AllArticles() {
       })}
     </div>
   );
-  //   return isClicked ? (
-  //     <>
-  //       <Article value={articleID} />
-  //     </>
-  //   ) : (
-  //
-  //   );
 }
