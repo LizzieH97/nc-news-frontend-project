@@ -46,3 +46,13 @@ export const upVoteArticle = (article_id, inc) => {
       return response;
     });
 };
+
+export const postComment = ({ username, body, article_id }) => {
+  const postBody = { username, body, article_id };
+  return articleAPI
+    .post(`/articles/${article_id}/comments`, postBody)
+    .then((response) => {
+      return response.data.comment;
+    })
+    .catch((err) => console.log(err));
+};
