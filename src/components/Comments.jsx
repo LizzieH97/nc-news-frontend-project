@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getCommentByArticleID, postComment } from "../api/APICalls";
+import {
+  getCommentByArticleID,
+  postComment,
+  deleteCommentByCommentID,
+} from "../api/APICalls";
 import { useParams } from "react-router-dom";
 import Article from "./Article";
 
@@ -33,7 +37,12 @@ export default function Comments(props) {
     });
     setCommentBody("");
   };
-
+  const deleteComment = (event) => {
+    const author = event.target.attributes[1].nodeValue;
+    const comment_id = event.target.value;
+    event.preventDefault();
+    deleteCommentByCommentID(comment_id).then(() => {});
+  };
   return (
     <div className="comment-grid-container">
       <form onSubmit={(event) => handleSubmit(event)}>
@@ -45,7 +54,6 @@ export default function Comments(props) {
         />
         <button type="submit">Submit!</button>
       </form>
-
       {comments.map((comment) => {
         return (
           <ul key={comment.comment_id} className="comment-grid-item">
@@ -60,6 +68,15 @@ export default function Comments(props) {
               <button>Wow!</button>
               <button>No!</button>
             </div>
+            <button
+              onClick={(event) => {
+                deleteComment(event);
+              }}
+              value={comment.comment_id}
+              author={comment.author}
+            >
+              Delete
+            </button>
           </ul>
         );
       })}
