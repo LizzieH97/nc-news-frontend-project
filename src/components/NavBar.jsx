@@ -1,8 +1,13 @@
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+import { Link } from "react-router-dom";
+
 export default function NavBar() {
+  const { user } = useContext(UserContext);
   return (
     <div className="nav-bar">
-      <p>This is the nav bar</p>
-      <a href="/articles">articles</a>
+      <p>Hello {user}</p>
+      <Link to="/articles">articles</Link>
     </div>
   );
 }
