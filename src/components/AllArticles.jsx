@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
-import { getAllArticles } from "../api/APICalls";
+import { getAllArticles, getArticlesByTopic } from "../api/APICalls";
+import { useSearchParams } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
 export default function AllArticles() {
   const [allArticles, setAllArticles] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topic = searchParams.get("topic");
 
+  console.log(topic);
   useEffect(() => {
-    getAllArticles(allArticles).then((gotArticles) => {
-      setAllArticles(gotArticles);
-    });
-  }, []);
+    if (topic) {
+      getArticlesByTopic(topic).then((gotArticles) => {
+        setAllArticles(gotArticles);
+      });
+    } else {
+      getAllArticles().then((gotArticles) => {
+        setAllArticles(gotArticles);
+      });
+    }
+  }, [topic]);
 
   return (
     <div className="article-grid-container">
