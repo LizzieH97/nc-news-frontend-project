@@ -57,6 +57,15 @@ export const postComment = ({ username, body, article_id }) => {
     .catch((err) => console.log(err));
 };
 
+export const getAllUsers = () => {
+  return articleAPI
+    .get(`/users`)
+    .then((response) => {
+      return response.data.users;
+    })
+    .catch((err) => console.log(err));
+};
+
 export const deleteCommentByCommentID = (comment_id) => {
   const returnedStr = "comment deleted!";
   return articleAPI

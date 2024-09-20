@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleArticle, upVoteArticle } from "../api/APICalls";
 import Comments from "./Comments";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [vote, setVote] = useState(0);
+  const { user } = useContext(UserContext);
   useEffect(() => {
     getSingleArticle(article_id).then((response) => {
       setArticle(response);

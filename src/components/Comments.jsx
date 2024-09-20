@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   getCommentByArticleID,
   postComment,
@@ -6,12 +6,13 @@ import {
 } from "../api/APICalls";
 import { useParams } from "react-router-dom";
 import Article from "./Article";
+import { UserContext } from "../contexts/UserContext";
 
 export default function Comments(props) {
   const [comments, setComments] = useState([]);
   const [commentBody, setCommentBody] = useState("");
   const { article_id } = useParams();
-
+  const { user } = useContext(UserContext);
   useEffect(() => {
     getCommentByArticleID(article_id).then(
       (response) => {
@@ -26,7 +27,7 @@ export default function Comments(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newComment = {
-      username: "grumpy19",
+      username: user,
       body: commentBody,
       article_id: article_id,
       votes: 0,
@@ -37,11 +38,18 @@ export default function Comments(props) {
     });
     setCommentBody("");
   };
+  let canDelete = "";
   const deleteComment = (event) => {
     const author = event.target.attributes[1].nodeValue;
     const comment_id = event.target.value;
     event.preventDefault();
-    deleteCommentByCommentID(comment_id).then(() => {});
+
+    if (author === user) {
+      canDelete += "comment-deletable";
+      deleteCommentByCommentID(comment_id).then(() => {});
+    } else {
+      canDelete += "comment-undeletable";
+    }
   };
   return (
     <div className="comment-grid-container">
@@ -74,6 +82,7 @@ export default function Comments(props) {
               }}
               value={comment.comment_id}
               author={comment.author}
+              id={canDelete}
             >
               Delete
             </button>
