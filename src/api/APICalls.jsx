@@ -8,6 +8,7 @@ export const getAllArticles = () => {
   return articleAPI
     .get(`/articles`)
     .then((response) => {
+      console.log(response);
       return response.data.articlesWithComments;
     })
     .catch((err) => console.log(err));
@@ -74,4 +75,13 @@ export const deleteCommentByCommentID = (comment_id) => {
       return returnedStr;
     })
     .catch((err) => console.log(err));
+};
+
+export const getArticlesByTopic = (topic) => {
+  console.log("in here???");
+  return articleAPI
+    .get(`/articles`, { params: { topic: topic } })
+    .then((response) => {
+      return response.data.articlesInCategory;
+    });
 };
