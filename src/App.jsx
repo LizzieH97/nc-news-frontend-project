@@ -1,13 +1,11 @@
-import { useState } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import AllArticles from "./components/AllArticles";
 import Article from "./components/Article";
 import Comments from "./components/Comments";
 import AllUsers from "./components/AllUsers";
-import AllCategories from "./components/AllCategories";
 
 function App() {
   return (
@@ -24,7 +22,6 @@ function App() {
               element={Comments}
             />
             <Route path="/users" element={<AllUsers />} />
-            {/* <Route path="/articles?*" element={<AllCategories />} /> */}
           </Routes>
         </div>
       </>
