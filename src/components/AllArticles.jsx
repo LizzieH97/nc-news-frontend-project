@@ -9,7 +9,6 @@ export default function AllArticles() {
   const [searchParams, setSearchParams] = useSearchParams();
   const topic = searchParams.get("topic");
 
-  console.log(topic);
   useEffect(() => {
     if (topic) {
       getArticlesByTopic(topic).then((gotArticles) => {
@@ -29,7 +28,7 @@ export default function AllArticles() {
           <li key={article.article_id} className="article-grid-item">
             <p>Topic: {article.topic}</p>
             <Link to={`/articles/${article.article_id}`}>
-              <h2>{article.title}</h2>
+              <h2 className="article-link">{article.title}</h2>
             </Link>
             <img src={article.article_img_url} className="article-img" />
             <p>By {article.author}</p>

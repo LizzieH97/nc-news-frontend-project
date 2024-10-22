@@ -1,8 +1,5 @@
-# React + Vite
+Hi there! This is a front end project working with the NC News API I set up during my NC News back end project. The API can be found here:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+https://lizzie-hughes-nc-news-project.onrender.com/api
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Feel free to browse my code! If you want to see the app running use the command "npm run dev" after running "npm install" in the terminal.
